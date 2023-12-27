@@ -12,13 +12,13 @@
 size = Vector2(676.129, 675.77)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ge8b2"]
-size = Vector2(175.18, 295.795)
+size = Vector2(175.18, 308.297)
 
 [node name="VanGogh" type="Node2D"]
 
 [node name="Puzzle" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(565, 339)
+position = Vector2(745, 520)
 scale = Vector2(1.33, 1.33)
 
 [node name="Wooden-flooring" type="Sprite2D" parent="Puzzle"]
@@ -47,7 +47,7 @@ texture = ExtResource("3_pxpef")
 script = ExtResource("3_eiydr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzle/InteractivesObjects/Chair"]
-position = Vector2(-38.5, 14.5)
+position = Vector2(-38.5, 12.3233)
 scale = Vector2(0.348214, 0.348214)
 shape = SubResource("RectangleShape2D_ge8b2")
 
@@ -59,6 +59,11 @@ unique_name_in_owner = true
 position = Vector2(-2, -2)
 scale = Vector2(0.695, 0.695)
 texture = ExtResource("7_j527n")
+
+[node name="GameCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(583, 331)
+position_smoothing_speed = 1.0
 
 [connection signal="mouse_shape_entered" from="Puzzle/InteractivesObjects/Bed" to="Puzzle/InteractivesObjects/Bed" method="_on_mouse_shape_entered"]
 [connection signal="mouse_shape_exited" from="Puzzle/InteractivesObjects/Bed" to="Puzzle/InteractivesObjects/Bed" method="_on_mouse_shape_exited"]

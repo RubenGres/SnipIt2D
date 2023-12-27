@@ -2,8 +2,10 @@ class_name CursorLogic
 extends Node2D
 
 var _zooming_step = 0.05
-var _camera_offset = Vector2(0,0)
 var _camera_moving = false
+var _camera_offset = Vector2(0, 0)
+
+var _mouse_scale
 
 var _cursor_icons = {
 	"dot": load("res://Textures/gui/cursors/dot.png"),
@@ -42,6 +44,8 @@ func _ready():
 	_children = get_children()
 	_children.reverse()
 	
+	_mouse_scale = %MouseCursor.scale
+	
 	set_process_input(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
@@ -62,13 +66,13 @@ func _input(event):
 		
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			var scale_factor = 1 + _zooming_step
-			var new_scale = clamp(%Puzzle.scale[0] * scale_factor, 1, 3)
-			%Puzzle.scale = Vector2(new_scale, new_scale)
+			var new_scale = clamp(%GameCamera.zoom[0] * scale_factor, 1, 3)
+			%GameCamera.zoom = Vector2(new_scale, new_scale)
 			
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			var scale_factor = 1 - _zooming_step
-			var new_scale = clamp(%Puzzle.scale[0] * scale_factor, 1, 3)
-			%Puzzle.scale = Vector2(new_scale, new_scale)
+			var new_scale = clamp(%GameCamera.zoom[0] * scale_factor, 1, 3)
+			%GameCamera.zoom = Vector2(new_scale, new_scale)
 	
 func _process(delta):
 	var current_cursor = _cursor_icons["dot"]
@@ -82,9 +86,11 @@ func _process(delta):
 		else:
 			current_cursor = _cursor_icons["hand_closed"]
 	%MouseCursor.texture = current_cursor
-		
+	
 	if _camera_moving:
-		%Puzzle.position = get_global_mouse_position() - _camera_offset
+		%GameCamera.position += _camera_offset - get_local_mouse_position()
 	else:
-		_camera_offset = get_global_mouse_position() - %Puzzle.position 
+		_camera_offset = get_local_mouse_position()
+	
+	%MouseCursor.scale = _mouse_scale * 1/%GameCamera.zoom
 	%MouseCursor.position = get_global_mouse_position()
