@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://5l5f36rry05g"
+path="res://.godot/imported/wood pickup sound.mp3-18beb7b96a8c2d0c9be0d6b2f8e8314b.mp3str"
+
+[deps]
+
+source_file="res://SFX/wood pickup sound.mp3"
+dest_files=["res://.godot/imported/wood pickup sound.mp3-18beb7b96a8c2d0c9be0d6b2f8e8314b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
