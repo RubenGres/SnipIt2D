@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdibh7olkkqvr"]
+
+[ext_resource type="Texture2D" uid="uid://kcyuf6tuaj1d" path="res://Textures/lvl_0/backgroud.png" id="2_kg0or"]
+[ext_resource type="Script" path="res://Levels/PointerLogic.gd" id="3_eiydr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_erqlf"]
+size = Vector2(479.59, 448)
+
+[node name="VanGogh" type="Node2D"]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(125, 109)
+script = ExtResource("3_eiydr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1.5, 1)
+scale = Vector2(0.348214, 0.348214)
+shape = SubResource("RectangleShape2D_erqlf")
+
+[node name="Backgroud" type="Sprite2D" parent="Area2D"]
+position = Vector2(1, 1)
+scale = Vector2(0.348214, 0.348214)
+texture = ExtResource("2_kg0or")
+
+[connection signal="mouse_shape_entered" from="Area2D" to="Area2D" method="_on_mouse_shape_entered"]
+[connection signal="mouse_shape_exited" from="Area2D" to="Area2D" method="_on_mouse_shape_exited"]

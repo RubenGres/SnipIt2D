@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdibh7olkkqvr"]
+
+[ext_resource type="Script" path="res://Levels/CursorLogic.gd" id="1_yyuob"]
+[ext_resource type="Texture2D" uid="uid://kcyuf6tuaj1d" path="res://Textures/lvl_0/backgroud.png" id="2_kg0or"]
+[ext_resource type="Script" path="res://Levels/PointerLogic.gd" id="3_eiydr"]
+[ext_resource type="Texture2D" uid="uid://cmp1nqksjoy0k" path="res://Textures/lvl_0/bed.png" id="3_pxpef"]
+[ext_resource type="Texture2D" uid="uid://h43de2rbflcr" path="res://Textures/lvl_0/chair.png" id="4_mopei"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2od72"]
+size = Vector2(1378.46, 1277.95)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_erqlf"]
+size = Vector2(676.129, 675.77)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ge8b2"]
+size = Vector2(175.18, 295.795)
+
+[node name="VanGogh" type="Node2D"]
+
+[node name="Background" type="Area2D" parent="."]
+position = Vector2(581, 314)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background"]
+position = Vector2(1, 1.5)
+scale = Vector2(0.348214, 0.348214)
+shape = SubResource("RectangleShape2D_2od72")
+
+[node name="Texture" type="Sprite2D" parent="Background"]
+texture = ExtResource("2_kg0or")
+
+[node name="InteractivesObjects" type="Node2D" parent="."]
+position = Vector2(581, 314)
+script = ExtResource("1_yyuob")
+
+[node name="Bed" type="Area2D" parent="InteractivesObjects"]
+script = ExtResource("3_eiydr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/Bed"]
+position = Vector2(98.2813, 59.3438)
+scale = Vector2(0.348214, 0.348214)
+shape = SubResource("RectangleShape2D_erqlf")
+
+[node name="Texture" type="Sprite2D" parent="InteractivesObjects/Bed"]
+texture = ExtResource("3_pxpef")
+
+[node name="Chair" type="Area2D" parent="InteractivesObjects"]
+script = ExtResource("3_eiydr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/Chair"]
+position = Vector2(-38.5, 14.5)
+scale = Vector2(0.348214, 0.348214)
+shape = SubResource("RectangleShape2D_ge8b2")
+
+[node name="Texture" type="Sprite2D" parent="InteractivesObjects/Chair"]
+texture = ExtResource("4_mopei")
+
+[connection signal="mouse_shape_entered" from="InteractivesObjects/Bed" to="InteractivesObjects/Bed" method="_on_mouse_shape_entered"]
+[connection signal="mouse_shape_exited" from="InteractivesObjects/Bed" to="InteractivesObjects/Bed" method="_on_mouse_shape_exited"]
+[connection signal="mouse_shape_entered" from="InteractivesObjects/Chair" to="InteractivesObjects/Chair" method="_on_mouse_shape_entered"]
+[connection signal="mouse_shape_exited" from="InteractivesObjects/Chair" to="InteractivesObjects/Chair" method="_on_mouse_shape_exited"]
