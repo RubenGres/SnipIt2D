@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cmp1nqksjoy0k"
-path="res://.godot/imported/bed.png-4e93ab4b4e8aea364060f99e90f9a3e4.ctex"
+path="res://.godot/imported/bed.png-2d1df57e48cf3945723f6e9a818a3197.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/lvl_0/bed.png"
-dest_files=["res://.godot/imported/bed.png-4e93ab4b4e8aea364060f99e90f9a3e4.ctex"]
+source_file="res://Textures/Levels/level0/bed.png"
+dest_files=["res://.godot/imported/bed.png-2d1df57e48cf3945723f6e9a818a3197.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m33tnph2c46r"
-path="res://.godot/imported/cle.png-d0c8ea1ad3b3bbf0dea6f920ee1efafe.ctex"
+uid="uid://vxu3xisrj5qn"
+path="res://.godot/imported/drawer.png-ee3322c2b3ed5802a2d429f9aa589736.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/lvl_0/cle.png"
-dest_files=["res://.godot/imported/cle.png-d0c8ea1ad3b3bbf0dea6f920ee1efafe.ctex"]
+source_file="res://Textures/Levels/level0/drawer.png"
+dest_files=["res://.godot/imported/drawer.png-ee3322c2b3ed5802a2d429f9aa589736.ctex"]
 
 [params]
 

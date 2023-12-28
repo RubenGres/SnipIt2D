@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kcyuf6tuaj1d"
-path="res://.godot/imported/backgroud.png-ada15eed78c4fdf0d277f29e6d0e5969.ctex"
+uid="uid://dkfyrnnmrr5ed"
+path="res://.godot/imported/marto2.png-e918646c4d75c6db954aa67db26bf6c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/lvl_0/backgroud.png"
-dest_files=["res://.godot/imported/backgroud.png-ada15eed78c4fdf0d277f29e6d0e5969.ctex"]
+source_file="res://Textures/Levels/level0/marto2.png"
+dest_files=["res://.godot/imported/marto2.png-e918646c4d75c6db954aa67db26bf6c2.ctex"]
 
 [params]
 

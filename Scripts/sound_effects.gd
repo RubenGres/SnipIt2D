@@ -5,6 +5,7 @@ func play(sound, pitch=1.0):
 	audio_stream_play.pitch_scale = pitch
 	audio_stream_play.play()
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

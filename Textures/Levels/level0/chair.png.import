@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boodejd4808qa"
-path="res://.godot/imported/manto.png-16d0e5891143e12cc25dbc29a7ea6fdc.ctex"
+uid="uid://h43de2rbflcr"
+path="res://.godot/imported/chair.png-e11ae4c43654cd1d2cd42bd709742d4d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/lvl_0/manto.png"
-dest_files=["res://.godot/imported/manto.png-16d0e5891143e12cc25dbc29a7ea6fdc.ctex"]
+source_file="res://Textures/Levels/level0/chair.png"
+dest_files=["res://.godot/imported/chair.png-e11ae4c43654cd1d2cd42bd709742d4d.ctex"]
 
 [params]
 

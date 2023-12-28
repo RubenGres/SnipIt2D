@@ -1,0 +1,61 @@
+[
+	{
+		"texture": "backgroud.png"
+	},
+	{
+		"texture": "bed.png",
+		"children": [
+			{
+				"texture": "chair2.png"
+			},
+			{
+				"texture": "chair.png"
+			}
+		]
+	},
+	{
+		"texture": "cle.png",
+		"children": []
+	},
+	{
+		"texture": "drawer.png",
+		"children": [
+			{
+				"texture": "manto.png"
+			},
+			{
+				"texture": "marto1.png"
+			},
+			{
+				"texture": "marto2.png"
+			}
+		]
+	},
+	{
+		"texture": "ok window.png"
+	},
+	{
+		"texture": "paint1.png"
+	},
+	{
+		"texture": "paint2.png"
+	},
+	{
+		"texture": "paint3.png"
+	},
+	{
+		"texture": "paint4.png"
+	},
+	{
+		"texture": "paint5.png"
+	},
+	{
+		"texture": "paint6.png"
+	},
+	{
+		"texture": "stool.png"
+	},
+	{
+		"texture": "towel.png"
+	}
+]

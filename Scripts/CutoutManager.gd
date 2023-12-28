@@ -1,18 +1,13 @@
-class_name InteractiveObjects
+class_name CutoutManager
 extends Node2D
+
+var _min_pitch = 0.7
+var _max_pitch = 3
 
 var _camera_moving = false
 var _camera_offset = Vector2(0, 0)
 
 var _dragged_cutout
-
-var _mouse_scale
-var _cursor_icons = {
-	"dot": load("res://Textures/gui/cursors/dot.png"),
-	"hand_open": load("res://Textures/gui/cursors/hand_open.png"),
-	"hand_closed": load("res://Textures/gui/cursors/hand_closed.png"),
-	"cissors_open": load("res://Textures/gui/cursors/cissors_open.png")
-}
 
 var _childrens: Array
 
@@ -30,7 +25,7 @@ func _put_cutout_on_top(index):
 	_childrens.append(cutout)
 	_reorder_cutouts()
 
-func _pickup_cutout():
+func pickup_cutout():
 	var index = _get_top_cutout_index()
 	
 	if index != -1:
@@ -39,6 +34,12 @@ func _pickup_cutout():
 			_put_cutout_on_top(index)
 			cutout.pickup()
 			_dragged_cutout = cutout
+
+func snip_or_drop_cutout():
+	if _dragged_cutout:
+		_drop_cutout()
+	else:
+		_snip_cutout()
 
 func _drop_cutout():
 	if _dragged_cutout:
@@ -52,7 +53,7 @@ func _snip_cutout():
 		if not cutout.is_snipped:
 			cutout.snip()
 
-func _set_pitch_in_cutout():
+func _set_pitch_in_cutouts():
 	var areas = []
 	for child in _childrens:
 		areas.append(child.get_area())
@@ -61,7 +62,7 @@ func _set_pitch_in_cutout():
 	var max_area = areas.max()
 	
 	for child in _childrens:
-		child.pitch = 1 - (child.area / max_area) + 0.5
+		child.pitch = _min_pitch +  (_max_pitch - _min_pitch) * 1-(child.area/max_area)
 
 func _reorder_cutouts():
 	for child_index in range(len(_childrens)):
@@ -69,40 +70,21 @@ func _reorder_cutouts():
 		child.z_index = child_index + 1
 
 func _ready():
-	set_process_input(true)
-	
 	_childrens = get_children()
-	_set_pitch_in_cutout()	
+	_set_pitch_in_cutouts()	
 	_reorder_cutouts()
-	
-	_mouse_scale = %MouseCursor.scale
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				_pickup_cutout()
-			else:
-				if _dragged_cutout:
-					_drop_cutout()
-				else:
-					_snip_cutout()
-	
-func _process(delta):
-	var current_cursor = _cursor_icons["dot"]
-	
+func _process(delta):	
 	var index = _get_top_cutout_index()
 	if index != -1:
 		var cutout = _childrens[index]
 		
 		if not cutout.is_snipped:
-			current_cursor = _cursor_icons["cissors_open"]
+			%MouseCursor.change_cursor("cissors_open")
 		elif not cutout.dragging:
-			current_cursor = _cursor_icons["hand_open"]
+			%MouseCursor.change_cursor("hand_open")
 		else:
-			current_cursor = _cursor_icons["hand_closed"]
-	
-	%MouseCursor.texture = current_cursor
-	%MouseCursor.scale = _mouse_scale * 1/%GameCamera.zoom
-	%MouseCursor.position = get_global_mouse_position()
+			%MouseCursor.change_cursor("hand_closed")
+	else:
+		%MouseCursor.change_cursor("dot")
+		

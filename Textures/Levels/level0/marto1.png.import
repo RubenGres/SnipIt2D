@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vxu3xisrj5qn"
-path="res://.godot/imported/drawer.png-f5359d18b825aadd005d8f2afa704385.ctex"
+uid="uid://dy41odpt2xstk"
+path="res://.godot/imported/marto1.png-f9ec9bb4025f16cf0866ff21bd14759b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/lvl_0/drawer.png"
-dest_files=["res://.godot/imported/drawer.png-f5359d18b825aadd005d8f2afa704385.ctex"]
+source_file="res://Textures/Levels/level0/marto1.png"
+dest_files=["res://.godot/imported/marto1.png-f9ec9bb4025f16cf0866ff21bd14759b.ctex"]
 
 [params]
 
