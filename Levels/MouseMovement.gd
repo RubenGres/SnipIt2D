@@ -7,6 +7,8 @@ var _camera_offset = Vector2(0, 0)
 
 var _mouse_scale
 
+var _dragged_cutout
+
 var _cursor_icons = {
 	"dot": load("res://Textures/gui/cursors/dot.png"),
 	"hand_open": load("res://Textures/gui/cursors/hand_open.png"),
@@ -23,16 +25,18 @@ func _get_top_cutout():
 			
 	return null
 
-func _set_dragging():
+func _pickup_cutout():
 	var cutout = _get_top_cutout()
 	
 	if cutout:
 		if cutout.is_snipped:
-			cutout.dragging = true
+			cutout.pickup()
+			_dragged_cutout = cutout
 
-func _unset_dragging():
-	for child in _children:
-		child.dragging = false
+func _drop_cutout():
+	if _dragged_cutout:
+		_dragged_cutout.drop()
+		_dragged_cutout = null
 
 func _snip_cutout():
 	var cutout = _get_top_cutout()
@@ -53,10 +57,12 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				_set_dragging()
+				_pickup_cutout()
 			else:
-				_unset_dragging()
-				_snip_cutout()
+				if _dragged_cutout:
+					_drop_cutout()
+				else:
+					_snip_cutout()
 					
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:

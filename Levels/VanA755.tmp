@@ -95,7 +95,6 @@ position_smoothing_speed = 1.0
 
 [node name="MainThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_18674")
-volume_db = -11.458
 autoplay = true
 
 [node name="SFX" type="Node" parent="."]
