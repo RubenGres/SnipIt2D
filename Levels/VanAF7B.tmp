@@ -1,15 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://cdibh7olkkqvr"]
+[gd_scene load_steps=16 format=3 uid="uid://cdibh7olkkqvr"]
 
 [ext_resource type="Texture2D" uid="uid://bwo67l0hu6brq" path="res://Textures/decor/wooden-flooring.jpg" id="1_o4qcd"]
 [ext_resource type="Script" path="res://Levels/MouseMovement.gd" id="1_yyuob"]
 [ext_resource type="Texture2D" uid="uid://kcyuf6tuaj1d" path="res://Textures/lvl_0/backgroud.png" id="2_kg0or"]
-[ext_resource type="Script" path="res://Levels/InteractiveObjects.gd" id="3_eiydr"]
+[ext_resource type="Script" path="res://Levels/CutoutScript.gd" id="3_eiydr"]
 [ext_resource type="Texture2D" uid="uid://cmp1nqksjoy0k" path="res://Textures/lvl_0/bed.png" id="3_pxpef"]
 [ext_resource type="Texture2D" uid="uid://h43de2rbflcr" path="res://Textures/lvl_0/chair.png" id="4_mopei"]
 [ext_resource type="Shader" path="res://Levels/Outline.gdshader" id="5_0bxkc"]
 [ext_resource type="Texture2D" uid="uid://13kjd5ecbtub" path="res://Textures/gui/cursors/dot.png" id="7_j527n"]
 [ext_resource type="AudioStream" uid="uid://eaol8utpthn4" path="res://SFX/Theme.mp3" id="9_18674"]
-[ext_resource type="Script" path="res://Levels/GameCamera.gd" id="9_g82hd"]
 [ext_resource type="Script" path="res://Levels/sound_effects.gd" id="10_36sw3"]
 [ext_resource type="AudioStream" uid="uid://xtuw64tf35cm" path="res://SFX/cut sound.mp3" id="10_k7woq"]
 [ext_resource type="AudioStream" uid="uid://5l5f36rry05g" path="res://SFX/wood pickup sound.mp3" id="12_s5nad"]
@@ -19,7 +18,7 @@
 shader = ExtResource("5_0bxkc")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 1.0
-shader_parameter/pattern = 1
+shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
@@ -27,7 +26,7 @@ shader_parameter/add_margins = true
 shader = ExtResource("5_0bxkc")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 1.0
-shader_parameter/pattern = 1
+shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
@@ -50,7 +49,6 @@ texture = ExtResource("2_kg0or")
 script = ExtResource("1_yyuob")
 
 [node name="Bed" type="Area2D" parent="Puzzle/InteractivesObjects"]
-z_index = 1
 script = ExtResource("3_eiydr")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Puzzle/InteractivesObjects/Bed"]
@@ -63,11 +61,10 @@ position = Vector2(0, -0.75188)
 texture = ExtResource("3_pxpef")
 
 [node name="Chair" type="Area2D" parent="Puzzle/InteractivesObjects"]
-z_index = 2
 position = Vector2(-1.50376, -4.5113)
 script = ExtResource("3_eiydr")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Puzzle/InteractivesObjects/Chair"]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Puzzle/InteractivesObjects/Chair"]
 polygon = PackedVector2Array(-24.812, -6.01501, -9, 2.39999, -9, 15.5, -11.2782, 43.609, -15.7895, 48.1203, -18.797, 39.8496, -24.812, 48.8722, -24.0602, 66.9173, -34.5865, 66.9173, -36.8421, 44.3609, -51.1278, 39.0977, -51.8797, 52.6316, -62.406, 51.1278, -66.5, -6, -70.6767, -34.5865, -61.6541, -44.3609, -39.8496, -42.8571, -35.3383, -33.8346, -35.3383, -10.5263)
 
 [node name="Texture" type="Sprite2D" parent="Puzzle/InteractivesObjects/Chair"]
@@ -76,7 +73,6 @@ texture = ExtResource("4_mopei")
 
 [node name="MouseCursor" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-z_index = 4096
 position = Vector2(-2, -2)
 scale = Vector2(0.695, 0.695)
 texture = ExtResource("7_j527n")
@@ -85,11 +81,11 @@ texture = ExtResource("7_j527n")
 unique_name_in_owner = true
 position = Vector2(583, 331)
 position_smoothing_speed = 1.0
-script = ExtResource("9_g82hd")
 
 [node name="MainThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_18674")
 volume_db = -11.458
+autoplay = true
 
 [node name="SFX" type="Node" parent="."]
 unique_name_in_owner = true

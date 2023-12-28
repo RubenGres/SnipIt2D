@@ -1,9 +1,8 @@
 extends Node
 
-func play(sound):
+func play(sound, pitch=1.0):
 	var audio_stream_play = get_node(sound)
-	#TODO randomize pitch
-	audio_stream_play.pitch_scale = randf_range(1, 3)
+	audio_stream_play.pitch_scale = pitch
 	audio_stream_play.play()
 
 # Called when the node enters the scene tree for the first time.
