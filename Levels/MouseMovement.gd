@@ -1,7 +1,6 @@
 class_name InteractiveObjects
 extends Node2D
 
-var _zooming_step = 0.05
 var _camera_moving = false
 var _camera_offset = Vector2(0, 0)
 
@@ -89,16 +88,6 @@ func _input(event):
 					_drop_cutout()
 				else:
 					_snip_cutout()
-		
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
-			var scale_factor = 1 + _zooming_step
-			var new_scale = clamp(%GameCamera.zoom[0] * scale_factor, 1, 3)
-			%GameCamera.zoom = Vector2(new_scale, new_scale)
-			
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
-			var scale_factor = 1 - _zooming_step
-			var new_scale = clamp(%GameCamera.zoom[0] * scale_factor, 1, 3)
-			%GameCamera.zoom = Vector2(new_scale, new_scale)
 	
 func _process(delta):
 	var current_cursor = _cursor_icons["dot"]
