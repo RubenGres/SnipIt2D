@@ -12,7 +12,6 @@ var is_snipped = false
 var sprite
 var area
 
-
 var _drag_offset = Vector2()
 var _hover_count = 0
 

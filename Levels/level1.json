@@ -1,0 +1,15 @@
+{
+	"background": "background.png",
+
+	"cutouts":[		
+		{
+			"texture": "key.png"
+		},
+		{
+			"texture": "woman.png"
+		},
+		{
+			"texture": "man.png"
+		}
+	]
+}

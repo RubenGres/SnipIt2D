@@ -11,8 +11,7 @@ func _load_json(path):
 
 	if error == OK:
 		var data_received = json.data
-		if typeof(data_received) == TYPE_ARRAY:
-			return data_received
+		return data_received
 
 
 func _create_cutout(cutout_info, texture_root):
@@ -55,7 +54,9 @@ func _create_cutout(cutout_info, texture_root):
 	return cutout
 
 func _create_level(level_info, texture_root):
-	for cutout_info in level_info:
+	get_node("Background").texture = load(texture_root + level_info["background"])
+	
+	for cutout_info in level_info["cutouts"]:
 		var cutout = _create_cutout(cutout_info, texture_root)
 		get_node("CutoutManager").add_child(cutout)
 	
@@ -63,8 +64,8 @@ func _create_level(level_info, texture_root):
 
 
 func _ready():
-	var level_info = _load_json("res://Levels/level0.json")
-	_create_level(level_info, "res://Textures/Levels/level0/")
+	var level_info = _load_json("res://Levels/level1.json")
+	_create_level(level_info, "res://Textures/Levels/level1/")
 
 
 func _process(delta):
