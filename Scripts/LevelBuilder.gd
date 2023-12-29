@@ -54,7 +54,13 @@ func _create_cutout(cutout_info, texture_root):
 	return cutout
 
 func _create_level(level_info, texture_root):
-	get_node("Background").texture = load(texture_root + level_info["background"])
+	var background_image = load(texture_root + level_info["background"])
+	get_node("Background").texture = background_image
+	
+	var max_side = max(background_image.get_width(), background_image.get_width())
+	var puzzle_scale = 512.0 / max_side
+	
+	self.scale = Vector2(puzzle_scale, puzzle_scale)
 	
 	for cutout_info in level_info["cutouts"]:
 		var cutout = _create_cutout(cutout_info, texture_root)
@@ -64,8 +70,8 @@ func _create_level(level_info, texture_root):
 
 
 func _ready():
-	var level_info = _load_json("res://Levels/level1.json")
-	_create_level(level_info, "res://Textures/Levels/level1/")
+	var level_info = _load_json("res://Levels/level0.json")
+	_create_level(level_info, "res://Textures/Levels/level0/")
 
 
 func _process(delta):

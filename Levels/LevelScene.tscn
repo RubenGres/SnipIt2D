@@ -27,15 +27,14 @@ shader_parameter/add_margins = true
 
 [node name="LevelScene" type="Node2D"]
 
-[node name="Puzzle" type="Node2D" parent="."]
-position = Vector2(615, 332)
-scale = Vector2(1.33, 1.33)
-script = ExtResource("1_4o7ij")
-
-[node name="Wooden-flooring" type="Sprite2D" parent="Puzzle"]
-position = Vector2(1.50374, 2.25563)
+[node name="Wooden-flooring" type="Sprite2D" parent="."]
+position = Vector2(616.504, 334.256)
 scale = Vector2(0.231689, 0.231689)
 texture = ExtResource("2_5ljlv")
+
+[node name="Puzzle" type="Node2D" parent="."]
+position = Vector2(615, 332)
+script = ExtResource("1_4o7ij")
 
 [node name="Background" type="Sprite2D" parent="Puzzle"]
 texture = ExtResource("3_dvoxt")
