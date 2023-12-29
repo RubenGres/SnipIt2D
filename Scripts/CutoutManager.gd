@@ -6,27 +6,27 @@ var _max_pitch = 3
 
 var _dragged_cutout
 
-var _childrens: Array
+var _children: Array
 
 func _get_top_cutout_index():
-	for i in range(_childrens.size() - 1, -1, -1):
-		var child = _childrens[i]
+	for i in range(_children.size() - 1, -1, -1):
+		var child = _children[i]
 		if child.over_shape:
 			return i
 
 	return -1
 
 func _put_cutout_on_top(index):
-	var cutout = _childrens[index]
-	_childrens.remove_at(index)
-	_childrens.append(cutout)
+	var cutout = _children[index]
+	_children.remove_at(index)
+	_children.append(cutout)
 	_reorder_cutouts()
 
 func pickup_cutout():
 	var index = _get_top_cutout_index()
 	
 	if index != -1:
-		var cutout = _childrens[index]
+		var cutout = _children[index]
 		if cutout.is_snipped:
 			_put_cutout_on_top(index)
 			cutout.pickup()
@@ -46,36 +46,38 @@ func _drop_cutout():
 func _snip_cutout():
 	var index = _get_top_cutout_index()
 	if index != -1:
-		var cutout = _childrens[index]
+		var cutout = _children[index]
 		if not cutout.is_snipped:
 			cutout.snip()
 
 func _set_pitch_in_cutouts():
 	var areas = []
-	for child in _childrens:
+	for child in _children:
 		areas.append(child.get_area())
 		
 	var min_area = areas.min()
 	var max_area = areas.max()
 	
-	for child in _childrens:
+	for child in _children:
 		child.pitch = _min_pitch +  (_max_pitch - _min_pitch) * 1-(child.area/max_area)
 
 func _reorder_cutouts():
-	for child_index in range(len(_childrens)):
-		var child = _childrens[child_index]
+	for child_index in range(len(_children)):
+		var child = _children[child_index]
 		child.z_index = child_index + 1
 
 func _ready():
 	_reorder_cutouts()
 
 func _process(delta):
+	if not 	_children:
+		_children = get_children()
+		
 	_set_pitch_in_cutouts()	
-	_childrens = get_children()
 	
 	var index = _get_top_cutout_index()
 	if index != -1:
-		var cutout = _childrens[index]
+		var cutout = _children[index]
 		
 		if not cutout.is_snipped:
 			%MouseCursor.change_cursor("cissors_open")

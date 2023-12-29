@@ -1,5 +1,9 @@
 extends Area2D
 
+# Parameters
+var pitch = 1
+var outline_width = 2
+
 # Variables for dragging
 var dragging = false
 var over_shape = false
@@ -8,7 +12,6 @@ var is_snipped = false
 var sprite
 var area
 
-var pitch = 1
 
 var _drag_offset = Vector2()
 var _hover_count = 0
@@ -25,7 +28,7 @@ func _get_polygon_area(polygon):
 	return abs(area) / 2.0
 
 func snip():
-	sprite.material.set_shader_parameter("width", 3)
+	sprite.material.set_shader_parameter("width", outline_width)
 	_SFX_ref.play("cut")
 	is_snipped = true
 	
