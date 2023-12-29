@@ -5,13 +5,15 @@ var dragging = false
 var over_shape = false
 var is_snipped = false
 
-var texture
+var sprite
 var area
 
 var pitch = 1
 
 var _drag_offset = Vector2()
 var _hover_count = 0
+
+var _SFX_ref
 
 func _get_polygon_area(polygon):
 	var area = 0.0
@@ -23,16 +25,16 @@ func _get_polygon_area(polygon):
 	return abs(area) / 2.0
 
 func snip():
-	texture.material.set_shader_parameter("width", 3)
-	%SFX.play("cut")
+	sprite.material.set_shader_parameter("width", 3)
+	_SFX_ref.play("cut")
 	is_snipped = true
 	
 func pickup():
-	%SFX.play("pickup", pitch)
+	_SFX_ref.play("pickup", pitch)
 	dragging = true
 	
 func drop():
-	%SFX.play("drop", pitch)
+	_SFX_ref.play("drop", pitch)
 	dragging = false
 
 func get_area():
@@ -41,16 +43,19 @@ func get_area():
 	return area
 
 func _ready():
-	texture = get_node("Texture")
-	texture.material.set_shader_parameter("width", 0)
+	sprite = get_node("Sprite")
+	sprite.material.set_shader_parameter("width", 0)
+	_SFX_ref = get_tree().get_root().get_node("LevelScene/SFX")
 	
 	set_process_input(true)
 
 func _process(delta):
+	var puzzle = get_tree().get_root().get_node("LevelScene/Puzzle")
+
 	if dragging:
-		position = get_global_mouse_position() / %Puzzle.scale - _drag_offset
+		position = get_global_mouse_position() / puzzle.scale - _drag_offset
 	else:
-		_drag_offset = get_global_mouse_position() / %Puzzle.scale - position 
+		_drag_offset = get_global_mouse_position() / puzzle.scale - position 
 
 func _on_mouse_shape_entered(shape_idx):
 	_hover_count += 1

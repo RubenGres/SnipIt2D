@@ -4,9 +4,6 @@ extends Node2D
 var _min_pitch = 0.7
 var _max_pitch = 3
 
-var _camera_moving = false
-var _camera_offset = Vector2(0, 0)
-
 var _dragged_cutout
 
 var _childrens: Array
@@ -70,11 +67,12 @@ func _reorder_cutouts():
 		child.z_index = child_index + 1
 
 func _ready():
-	_childrens = get_children()
-	_set_pitch_in_cutouts()	
 	_reorder_cutouts()
 
-func _process(delta):	
+func _process(delta):
+	_set_pitch_in_cutouts()	
+	_childrens = get_children()
+	
 	var index = _get_top_cutout_index()
 	if index != -1:
 		var cutout = _childrens[index]
