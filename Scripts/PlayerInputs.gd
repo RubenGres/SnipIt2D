@@ -1,6 +1,6 @@
 extends Node
 
-
+var mouseVelocity = Vector2.ZERO
 
 func _ready():
 	set_process_input(true)
@@ -29,3 +29,6 @@ func _input(event):
 			
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			%GameCamera.zoom_out()
+			
+	if event is InputEventMouseMotion:
+		mouseVelocity += event.relative

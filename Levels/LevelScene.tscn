@@ -71,6 +71,7 @@ texture = ExtResource("9_dxwor")
 script = ExtResource("10_2da0y")
 
 [node name="PlayerInputManager" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("11_omuwb")
 
 [node name="MainThemePlayer" type="AudioStreamPlayer" parent="."]
