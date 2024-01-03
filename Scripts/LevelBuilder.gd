@@ -14,16 +14,34 @@ func _load_json(path):
 		return data_received
 
 
+func _get_name_from_info(cutout_info):
+	if cutout_info.has(name):
+		return cutout_info['name']
+	
+	return cutout_info['texture'].split('.')[0]
+
+
+func _set_z_index(cutouts):
+	for child_index in range(len(cutouts)):
+		var child = cutouts[child_index]
+		child.z_index = child_index + 1
+
+
 func _create_cutout(cutout_info, texture_root):
 	# Create node
 	var cutout = get_node("CutoutManager/CutoutPrefab").duplicate()
 	var sprite = cutout.get_node("Sprite")
 	var texture = load(texture_root + cutout_info['texture'])
-		
-	# Add texture
-	cutout.name = cutout_info['texture'].split('.')[0]
 	sprite.texture = texture
 	sprite.material = sprite.material.duplicate()
+	
+	var shadow = cutout.get_node("Sprite_shadow")
+	var shadow_texture = load(texture_root + cutout_info['texture'])
+	shadow.texture = shadow_texture
+	shadow.material = shadow.material.duplicate()
+
+	# set name
+	cutout.name = _get_name_from_info(cutout_info)
 	
 	# Set collision polygon from texture
 	var data = texture.get_image()
@@ -62,16 +80,30 @@ func _create_level(level_info, texture_root):
 	
 	self.scale = Vector2(puzzle_scale, puzzle_scale)
 	
+	var cutouts = {}
 	for cutout_info in level_info["cutouts"]:
 		var cutout = _create_cutout(cutout_info, texture_root)
+		cutouts[cutout.name] = cutout
+		
+	_set_z_index(cutouts.values())
+	
+	# add dependencies and node to scene
+	for cutout_info in level_info["cutouts"]:
+		var name = _get_name_from_info(cutout_info)
+		var cutout = cutouts[name]
+		
+		if cutout_info.has("dependencies"):
+			for dep in cutout_info["dependencies"]:
+				cutout.dependencies.append(cutouts[dep])
+	
 		get_node("CutoutManager").add_child(cutout)
 	
 	get_node("CutoutManager/CutoutPrefab").queue_free()
 
 
 func _ready():
-	var level_info = _load_json("res://Levels/level0.json")
-	_create_level(level_info, "res://Textures/Levels/level0/")
+	var level_info = _load_json("res://Levels/level2.json")
+	_create_level(level_info, "res://Assets/Textures/Levels/level2/")
 
 
 func _process(delta):

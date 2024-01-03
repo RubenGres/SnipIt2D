@@ -1,0 +1,148 @@
+[gd_scene load_steps=24 format=3 uid="uid://cdibh7olkkqvr"]
+
+[ext_resource type="Script" path="res://Scripts/LevelBuilder.gd" id="1_4o7ij"]
+[ext_resource type="Texture2D" uid="uid://bwo67l0hu6brq" path="res://Assets/Textures/decor/wooden-flooring.jpg" id="2_5ljlv"]
+[ext_resource type="Texture2D" uid="uid://kcyuf6tuaj1d" path="res://Assets/Textures/Levels/level0/background.png" id="3_dvoxt"]
+[ext_resource type="Script" path="res://Scripts/CutoutManager.gd" id="4_nmfld"]
+[ext_resource type="Script" path="res://Scripts/InteractiveObjects.gd" id="5_jt6yl"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="6_88cay"]
+[ext_resource type="Texture2D" uid="uid://cmp1nqksjoy0k" path="res://Assets/Textures/Levels/level0/bed.png" id="7_fn2ga"]
+[ext_resource type="Script" path="res://Scripts/GameCamera.gd" id="8_koetf"]
+[ext_resource type="Texture2D" uid="uid://13kjd5ecbtub" path="res://Assets/Textures/gui/cursors/dot.png" id="9_dxwor"]
+[ext_resource type="Script" path="res://Scripts/MouseCursor.gd" id="10_2da0y"]
+[ext_resource type="Script" path="res://Scripts/PlayerInputs.gd" id="11_omuwb"]
+[ext_resource type="AudioStream" uid="uid://eaol8utpthn4" path="res://SFX/Theme.mp3" id="12_f3us3"]
+[ext_resource type="Script" path="res://Scripts/sound_effects.gd" id="13_v1fif"]
+[ext_resource type="AudioStream" uid="uid://xtuw64tf35cm" path="res://SFX/cut sound.mp3" id="14_dbymd"]
+[ext_resource type="AudioStream" uid="uid://5l5f36rry05g" path="res://SFX/wood pickup sound.mp3" id="15_xrgsl"]
+[ext_resource type="AudioStream" uid="uid://cx5isow5rg3vt" path="res://SFX/wood drop sound.mp3" id="16_jdjfw"]
+[ext_resource type="Texture2D" uid="uid://v5nsga7amsh0" path="res://Assets/Textures/Levels/level2/pipe.png" id="17_w6gmo"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Shadow.gdshader" id="17_yfy8y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wy44m"]
+shader = ExtResource("17_yfy8y")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.407843)
+shader_parameter/shadow_offset = Vector2(15, -15)
+shader_parameter/shadow_only = true
+shader_parameter/opacity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b4ohh"]
+shader = ExtResource("6_88cay")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 3.0
+shader_parameter/opacity = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uedyn"]
+size = Vector2(476.5, 447.5)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ae8nb"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(25, 1, 1)
+gravity = Vector3(0, -98, 0)
+turbulence_enabled = true
+turbulence_noise_scale = 44.795
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_opye6"]
+shader = ExtResource("17_yfy8y")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.454902)
+shader_parameter/shadow_offset = Vector2(30, -30)
+shader_parameter/shadow_only = false
+shader_parameter/opacity = 1.0
+
+[node name="LevelScene" type="Node2D"]
+
+[node name="Wooden-flooring" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(616.504, 334.256)
+scale = Vector2(0.231689, 0.231689)
+texture = ExtResource("2_5ljlv")
+
+[node name="Puzzle" type="Node2D" parent="."]
+z_as_relative = false
+position = Vector2(350, 332)
+script = ExtResource("1_4o7ij")
+
+[node name="Background" type="Sprite2D" parent="Puzzle"]
+texture = ExtResource("3_dvoxt")
+
+[node name="CutoutManager" type="Node2D" parent="Puzzle"]
+unique_name_in_owner = true
+script = ExtResource("4_nmfld")
+
+[node name="CutoutPrefab" type="Area2D" parent="Puzzle/CutoutManager"]
+script = ExtResource("5_jt6yl")
+
+[node name="Sprite_shadow" type="Sprite2D" parent="Puzzle/CutoutManager/CutoutPrefab"]
+material = SubResource("ShaderMaterial_wy44m")
+texture = ExtResource("7_fn2ga")
+
+[node name="Sprite" type="Sprite2D" parent="Puzzle/CutoutManager/CutoutPrefab"]
+material = SubResource("ShaderMaterial_b4ohh")
+position = Vector2(0, -0.75188)
+texture = ExtResource("7_fn2ga")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Puzzle/CutoutManager/CutoutPrefab"]
+position = Vector2(-1.50375, -4.51129)
+polygon = PackedVector2Array(-5.26312, 36.8421, 80.4511, -46.6165, 215.789, 132.331)
+
+[node name="GameCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(583, 331)
+position_smoothing_speed = 1.0
+script = ExtResource("8_koetf")
+
+[node name="MouseCursor" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = 4096
+position = Vector2(-2, -2)
+scale = Vector2(0.695, 0.695)
+texture = ExtResource("9_dxwor")
+script = ExtResource("10_2da0y")
+
+[node name="PlayerInputManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("11_omuwb")
+
+[node name="MainThemePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_f3us3")
+volume_db = -15.0
+autoplay = true
+
+[node name="SFX" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("13_v1fif")
+
+[node name="cut" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("14_dbymd")
+
+[node name="pickup" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("15_xrgsl")
+
+[node name="drop" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("16_jdjfw")
+
+[node name="Area2D" type="Area2D" parent="."]
+z_as_relative = false
+position = Vector2(860, 333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+z_as_relative = false
+shape = SubResource("RectangleShape2D_uedyn")
+one_way_collision_margin = 0.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Area2D"]
+z_as_relative = false
+position = Vector2(-668, -105)
+process_material = SubResource("ParticleProcessMaterial_ae8nb")
+texture = ExtResource("9_dxwor")
+lifetime = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+material = SubResource("ShaderMaterial_opye6")
+scale = Vector2(0.335, 0.335)
+texture = ExtResource("17_w6gmo")
+region_rect = Rect2(100, 100, 100, 100)
+
+[connection signal="mouse_shape_entered" from="Puzzle/CutoutManager/CutoutPrefab" to="Puzzle/CutoutManager/CutoutPrefab" method="_on_mouse_shape_entered"]
+[connection signal="mouse_shape_exited" from="Puzzle/CutoutManager/CutoutPrefab" to="Puzzle/CutoutManager/CutoutPrefab" method="_on_mouse_shape_exited"]

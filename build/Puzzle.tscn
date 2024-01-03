@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=3 uid="uid://bngrjhw0ccex2"]
+
+[ext_resource type="Script" path="res://Scripts/LevelBuilder.gd" id="1_rtxia"]
+[ext_resource type="Texture2D" uid="uid://b5vi2ybetnpxn" path="res://Assets/Textures/Levels/level2/background.png" id="2_oqecb"]
+[ext_resource type="Script" path="res://Scripts/CutoutManager.gd" id="3_nwrv3"]
+[ext_resource type="Script" path="res://Scripts/InteractiveObjects.gd" id="4_rxrwq"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="5_vbt26"]
+[ext_resource type="Texture2D" uid="uid://v5nsga7amsh0" path="res://Assets/Textures/Levels/level2/pipe.png" id="6_ccu7h"]
+[ext_resource type="Texture2D" uid="uid://b8vkyknv12ni4" path="res://Assets/Textures/Levels/level2/n.png" id="7_dyrm8"]
+[ext_resource type="Texture2D" uid="uid://dsh854bjxm3gl" path="res://Assets/Textures/Levels/level2/pas.png" id="8_71e28"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ep6wc"]
+shader = ExtResource("5_vbt26")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 10.0
+shader_parameter/opacity = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fdyqc"]
+shader = ExtResource("5_vbt26")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 10.0
+shader_parameter/opacity = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3ot1"]
+shader = ExtResource("5_vbt26")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 10.0
+shader_parameter/opacity = null
+
+[node name="Puzzle" type="Node2D"]
+position = Vector2(350, 332)
+scale = Vector2(0.355062, 0.355062)
+script = ExtResource("1_rtxia")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_oqecb")
+
+[node name="CutoutManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_nwrv3")
+
+[node name="pipe" type="Area2D" parent="CutoutManager"]
+z_index = 1
+script = ExtResource("4_rxrwq")
+dependencies = [Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":1,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":ExtResource("4_rxrwq"),"pickup_height":10,"dependencies":[])
+, Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":1,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":ExtResource("4_rxrwq"),"pickup_height":10,"dependencies":[])
+]
+
+[node name="Sprite" type="Sprite2D" parent="CutoutManager/pipe"]
+material = SubResource("ShaderMaterial_ep6wc")
+position = Vector2(0, -0.75188)
+texture = ExtResource("6_ccu7h")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CutoutManager/pipe"]
+position = Vector2(-722.504, -507.011)
+polygon = PackedVector2Array(293, 133, 196, 143, 190, 143, 161, 153, 159, 153, 152, 166, 151, 166, 140, 218, 139, 218, 133, 307, 132, 307, 135, 401, 135, 415, 146, 492, 146, 498, 176, 577, 176, 579, 232, 644, 232, 645, 302, 679, 302, 680, 395, 695, 395, 696, 465, 694, 476, 694, 553, 679, 557, 679, 627, 650, 630, 650, 687, 617, 689, 617, 793, 534, 795, 534, 992, 333, 992, 332, 1070, 278, 1070, 277, 1149, 246, 1149, 245, 1227, 226, 1227, 225, 1269, 220, 1306, 220, 1347, 226, 1353, 226, 1368, 217, 1369, 217, 1373, 205, 1374, 205, 1373, 191, 1373, 186, 1361, 166, 1361, 164, 1336, 155, 1336, 154, 1311, 162, 1311, 163, 1261, 160, 1211, 160, 1124, 167, 1114, 167, 1009, 191, 1003, 191, 889, 242, 887, 242, 626, 422, 626, 423, 530, 464, 511, 464, 495, 446, 494, 446, 496, 270, 496, 252, 478, 161, 478, 158, 464, 148, 464, 147, 420, 138, 420, 137, 293, 132)
+
+[node name="n" type="Area2D" parent="CutoutManager"]
+z_index = 1
+script = ExtResource("4_rxrwq")
+
+[node name="Sprite" type="Sprite2D" parent="CutoutManager/n"]
+material = SubResource("ShaderMaterial_fdyqc")
+position = Vector2(0, -0.75188)
+texture = ExtResource("7_dyrm8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CutoutManager/n"]
+position = Vector2(-722.504, -507.011)
+polygon = PackedVector2Array(430, 913, 499, 913, 540, 851, 541, 851, 430, 849)
+
+[node name="pas" type="Area2D" parent="CutoutManager"]
+z_index = 1
+script = ExtResource("4_rxrwq")
+
+[node name="Sprite" type="Sprite2D" parent="CutoutManager/pas"]
+material = SubResource("ShaderMaterial_l3ot1")
+position = Vector2(0, -0.75188)
+texture = ExtResource("8_71e28")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CutoutManager/pas"]
+position = Vector2(-722.504, -507.011)
+polygon = PackedVector2Array(657, 920, 830, 920, 830, 840, 657, 840)
+
+[connection signal="mouse_shape_entered" from="CutoutManager/pipe" to="CutoutManager/pipe" method="_on_mouse_shape_entered"]
+[connection signal="mouse_shape_exited" from="CutoutManager/pipe" to="CutoutManager/pipe" method="_on_mouse_shape_exited"]
+[connection signal="mouse_shape_entered" from="CutoutManager/n" to="CutoutManager/n" method="_on_mouse_shape_entered"]
+[connection signal="mouse_shape_exited" from="CutoutManager/n" to="CutoutManager/n" method="_on_mouse_shape_exited"]
+[connection signal="mouse_shape_entered" from="CutoutManager/pas" to="CutoutManager/pas" method="_on_mouse_shape_entered"]
+[connection signal="mouse_shape_exited" from="CutoutManager/pas" to="CutoutManager/pas" method="_on_mouse_shape_exited"]

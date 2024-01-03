@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=3 uid="uid://dcmvah6x7e8wu"]
+
+[ext_resource type="Texture2D" uid="uid://bwo67l0hu6brq" path="res://Assets/Textures/decor/wooden-flooring.jpg" id="1_22yau"]
+[ext_resource type="Script" path="res://Scripts/GameCamera.gd" id="8_i185y"]
+[ext_resource type="Texture2D" uid="uid://13kjd5ecbtub" path="res://Assets/Textures/gui/cursors/dot.png" id="9_kaj5y"]
+[ext_resource type="Script" path="res://Scripts/MouseCursor.gd" id="10_an4ym"]
+[ext_resource type="Script" path="res://Scripts/PlayerInputs.gd" id="11_wndvu"]
+[ext_resource type="AudioStream" uid="uid://eaol8utpthn4" path="res://SFX/Theme.mp3" id="12_w6h1f"]
+[ext_resource type="Script" path="res://Scripts/sound_effects.gd" id="13_icfwd"]
+[ext_resource type="AudioStream" uid="uid://xtuw64tf35cm" path="res://SFX/cut sound.mp3" id="14_bo160"]
+[ext_resource type="AudioStream" uid="uid://5l5f36rry05g" path="res://SFX/wood pickup sound.mp3" id="15_2doyl"]
+[ext_resource type="AudioStream" uid="uid://cx5isow5rg3vt" path="res://SFX/wood drop sound.mp3" id="16_ime12"]
+
+[node name="LevelScene" type="Node2D"]
+
+[node name="Wooden-flooring" type="Sprite2D" parent="."]
+position = Vector2(616.504, 334.256)
+scale = Vector2(0.231689, 0.231689)
+texture = ExtResource("1_22yau")
+
+[node name="GameCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(583, 331)
+position_smoothing_speed = 1.0
+script = ExtResource("8_i185y")
+
+[node name="MouseCursor" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = 4096
+position = Vector2(-2, -2)
+scale = Vector2(0.695, 0.695)
+texture = ExtResource("9_kaj5y")
+script = ExtResource("10_an4ym")
+
+[node name="PlayerInputManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("11_wndvu")
+
+[node name="MainThemePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_w6h1f")
+volume_db = -15.0
+autoplay = true
+
+[node name="SFX" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("13_icfwd")
+
+[node name="cut" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("14_bo160")
+
+[node name="pickup" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("15_2doyl")
+
+[node name="drop" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("16_ime12")

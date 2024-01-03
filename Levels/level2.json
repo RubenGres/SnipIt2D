@@ -1,0 +1,24 @@
+{
+	"background": "background.png",
+
+	"cutouts":[
+		{
+			"texture": "pipe_inside.png",
+			"dependencies": ["battery"]
+		},
+		{
+			"texture": "battery.png",
+			"dependencies": ["pipe_cover"]
+		},
+		{
+			"texture": "pipe_cover.png",
+			"dependencies": ["n", "pas"]
+		},
+		{
+			"texture": "n.png"
+		},
+		{
+			"texture": "pas.png"
+		}
+	]
+}

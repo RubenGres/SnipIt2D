@@ -14,6 +14,7 @@ var _velocity = Vector2.ZERO
 var _camera_moving = false
 var _camera_offset = Vector2.ZERO
 
+
 func zoom_in():
 	var scale_factor = 1 + zooming_step
 	var new_scale = clamp(self.zoom[0] * scale_factor, min_zoom, max_zoom)
@@ -29,6 +30,7 @@ func zoom_out():
 func grab():
 	_camera_offset = get_global_mouse_position()
 	_camera_moving = true
+
 
 func drop():
 	_camera_moving = false
