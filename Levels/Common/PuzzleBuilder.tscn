@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://b128sdbypuiym"]
+
+[ext_resource type="Script" path="res://Scripts/LevelBuilder.gd" id="1_0oqe2"]
+[ext_resource type="Texture2D" uid="uid://kcyuf6tuaj1d" path="res://Assets/Textures/Levels/level0/background.png" id="2_3m51p"]
+[ext_resource type="Script" path="res://Scripts/CutoutManager.gd" id="3_2jg4j"]
+[ext_resource type="Script" path="res://Scripts/InteractiveObjects.gd" id="4_fb54o"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Shadow.gdshader" id="5_5gj7l"]
+[ext_resource type="Texture2D" uid="uid://cmp1nqksjoy0k" path="res://Assets/Textures/Levels/level0/bed.png" id="6_l5o5s"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="7_ljg8f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wy44m"]
+shader = ExtResource("5_5gj7l")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.407843)
+shader_parameter/shadow_offset = Vector2(15, -15)
+shader_parameter/shadow_only = true
+shader_parameter/opacity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b4ohh"]
+shader = ExtResource("7_ljg8f")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 3.0
+shader_parameter/opacity = 1.0
+
+[node name="Puzzle" type="Node2D"]
+z_as_relative = false
+position = Vector2(583, 331)
+scale = Vector2(1.29884, 1.29884)
+script = ExtResource("1_0oqe2")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_3m51p")
+
+[node name="CutoutManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_2jg4j")
+
+[node name="CutoutPrefab" type="Area2D" parent="CutoutManager"]
+script = ExtResource("4_fb54o")
+
+[node name="Sprite_shadow" type="Sprite2D" parent="CutoutManager/CutoutPrefab"]
+material = SubResource("ShaderMaterial_wy44m")
+texture = ExtResource("6_l5o5s")
+
+[node name="Sprite" type="Sprite2D" parent="CutoutManager/CutoutPrefab"]
+material = SubResource("ShaderMaterial_b4ohh")
+position = Vector2(0, -0.75188)
+texture = ExtResource("6_l5o5s")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CutoutManager/CutoutPrefab"]
+position = Vector2(-1.50375, -4.51129)
+polygon = PackedVector2Array(-5.26312, 36.8421, 80.4511, -46.6165, 215.789, 132.331)
+
+[connection signal="mouse_shape_entered" from="CutoutManager/CutoutPrefab" to="CutoutManager/CutoutPrefab" method="_on_mouse_shape_entered"]
+[connection signal="mouse_shape_exited" from="CutoutManager/CutoutPrefab" to="CutoutManager/CutoutPrefab" method="_on_mouse_shape_exited"]

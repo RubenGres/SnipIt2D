@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=3 uid="uid://3s0875hqqw2i"]
+
+[ext_resource type="Texture2D" uid="uid://dld8o2qtyuwda" path="res://Assets/Textures/Levels/level2/battery.png" id="1_ysa0s"]
+[ext_resource type="Script" path="res://Scripts/GameCamera.gd" id="2_5v5t4"]
+[ext_resource type="Script" path="res://Scripts/MouseCursor.gd" id="4_npd7v"]
+[ext_resource type="Script" path="res://Scripts/PlayerInputs.gd" id="4_rsssu"]
+[ext_resource type="Script" path="res://Scripts/sound_effects.gd" id="5_x3dcd"]
+[ext_resource type="AudioStream" uid="uid://xtuw64tf35cm" path="res://SFX/cut sound.mp3" id="6_713yb"]
+[ext_resource type="AudioStream" uid="uid://5l5f36rry05g" path="res://SFX/wood pickup sound.mp3" id="7_qiqw4"]
+[ext_resource type="AudioStream" uid="uid://cx5isow5rg3vt" path="res://SFX/wood drop sound.mp3" id="8_i54y5"]
+[ext_resource type="AudioStream" uid="uid://eaol8utpthn4" path="res://SFX/Theme.mp3" id="9_k6kdh"]
+[ext_resource type="Texture2D" uid="uid://13kjd5ecbtub" path="res://Assets/Textures/gui/cursors/dot.png" id="10_2iwmm"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("4_rsssu")
+
+[node name="MouseCursor" type="Sprite2D" parent="Player"]
+unique_name_in_owner = true
+z_index = 4096
+position = Vector2(-2, -2)
+scale = Vector2(0.695, 0.695)
+texture = ExtResource("10_2iwmm")
+script = ExtResource("4_npd7v")
+
+[node name="GameCamera" type="Camera2D" parent="Player"]
+unique_name_in_owner = true
+position = Vector2(583, 331)
+position_smoothing_speed = 1.0
+script = ExtResource("2_5v5t4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
+
+[node name="MainMenu" type="Control" parent="Player/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Pause" type="Button" parent="Player/CanvasLayer/MainMenu"]
+layout_mode = 2
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 76.0
+offset_bottom = 37.0
+text = "Pause"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Player/CanvasLayer/MainMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -54.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="DropArea" type="Button" parent="Player/CanvasLayer/MainMenu/HFlowContainer"]
+layout_mode = 2
+text = "End condition"
+vertical_icon_alignment = 0
+
+[node name="TextureRect" type="TextureRect" parent="Player/CanvasLayer/MainMenu/HFlowContainer/DropArea"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = -148.0
+offset_right = 283.0
+offset_bottom = 42.0
+rotation = 0.535956
+texture = ExtResource("1_ysa0s")
+expand_mode = 1
+
+[node name="FlowContainer" type="FlowContainer" parent="Player/CanvasLayer/MainMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VFlowContainer" type="VFlowContainer" parent="Player/CanvasLayer/MainMenu/FlowContainer"]
+layout_mode = 2
+
+[node name="SFX" type="Node" parent="Player"]
+script = ExtResource("5_x3dcd")
+
+[node name="cut" type="AudioStreamPlayer" parent="Player/SFX"]
+stream = ExtResource("6_713yb")
+
+[node name="pickup" type="AudioStreamPlayer" parent="Player/SFX"]
+stream = ExtResource("7_qiqw4")
+
+[node name="drop" type="AudioStreamPlayer" parent="Player/SFX"]
+stream = ExtResource("8_i54y5")
+
+[node name="main_theme" type="AudioStreamPlayer" parent="Player/SFX"]
+stream = ExtResource("9_k6kdh")
+volume_db = -15.0
+autoplay = true
+
+[connection signal="pressed" from="Player/CanvasLayer/MainMenu/Pause" to="Player/CanvasLayer/MainMenu" method="_on_start_pressed"]

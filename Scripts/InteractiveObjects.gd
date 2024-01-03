@@ -70,10 +70,10 @@ func get_area():
 	return area
 
 func _ready():
+	_SFX_ref = $"../../../Player/SFX"
 	sprite = get_node("Sprite")
 	shadow = get_node("Sprite_shadow")
 	sprite.material.set_shader_parameter("opacity", 0)
-	_SFX_ref = %SFX
 	_outline_width = sprite.material.get_shader_parameter("line_thickness")
 	
 	# create dependencies list from paths
@@ -86,8 +86,8 @@ func _ready():
 	set_process_input(true)
 
 func _process(delta):
-	_puzzle_ref = %Puzzle
-	_camera_ref = %GameCamera
+	_puzzle_ref = $"../../"
+	_camera_ref = $"../../../Player/GameCamera"
 	
 	if is_snipped:
 		sprite.material.set_shader_parameter("opacity", 1)

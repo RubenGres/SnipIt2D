@@ -1,0 +1,75 @@
+[gd_scene load_steps=13 format=3 uid="uid://cdibh7olkkqvr"]
+
+[ext_resource type="Script" path="res://Scripts/LevelBuilder.gd" id="1_18xqo"]
+[ext_resource type="Texture2D" uid="uid://kcyuf6tuaj1d" path="res://Assets/Textures/Levels/level0/background.png" id="2_2remb"]
+[ext_resource type="Script" path="res://Scripts/CutoutManager.gd" id="3_m8y2k"]
+[ext_resource type="Script" path="res://Scripts/InteractiveObjects.gd" id="4_fgio4"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Shadow.gdshader" id="5_6tyaj"]
+[ext_resource type="Texture2D" uid="uid://cmp1nqksjoy0k" path="res://Assets/Textures/Levels/level0/bed.png" id="6_8h5vm"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="7_wrcsh"]
+[ext_resource type="Texture2D" uid="uid://13kjd5ecbtub" path="res://Assets/Textures/gui/cursors/dot.png" id="8_1hu6d"]
+[ext_resource type="PackedScene" uid="uid://djrfv2oucwn26" path="res://Levels/Common/Player.tscn" id="8_ndo7e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wy44m"]
+shader = ExtResource("5_6tyaj")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.407843)
+shader_parameter/shadow_offset = Vector2(15, -15)
+shader_parameter/shadow_only = true
+shader_parameter/opacity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b4ohh"]
+shader = ExtResource("7_wrcsh")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 3.0
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ae8nb"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(25, 1, 1)
+gravity = Vector3(0, -98, 0)
+turbulence_enabled = true
+turbulence_noise_scale = 44.795
+
+[node name="Level" type="Node2D"]
+
+[node name="Puzzle" type="Node2D" parent="."]
+z_as_relative = false
+position = Vector2(583, 331)
+scale = Vector2(1.29884, 1.29884)
+script = ExtResource("1_18xqo")
+
+[node name="Background" type="Sprite2D" parent="Puzzle"]
+texture = ExtResource("2_2remb")
+
+[node name="CutoutManager" type="Node2D" parent="Puzzle"]
+unique_name_in_owner = true
+script = ExtResource("3_m8y2k")
+
+[node name="CutoutPrefab" type="Area2D" parent="Puzzle/CutoutManager"]
+script = ExtResource("4_fgio4")
+
+[node name="Sprite_shadow" type="Sprite2D" parent="Puzzle/CutoutManager/CutoutPrefab"]
+material = SubResource("ShaderMaterial_wy44m")
+texture = ExtResource("6_8h5vm")
+
+[node name="Sprite" type="Sprite2D" parent="Puzzle/CutoutManager/CutoutPrefab"]
+material = SubResource("ShaderMaterial_b4ohh")
+position = Vector2(0, -0.75188)
+texture = ExtResource("6_8h5vm")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Puzzle/CutoutManager/CutoutPrefab"]
+position = Vector2(-1.50375, -4.51129)
+polygon = PackedVector2Array(-5.26312, 36.8421, 80.4511, -46.6165, 215.789, 132.331)
+
+[node name="Player" parent="." instance=ExtResource("8_ndo7e")]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_as_relative = false
+position = Vector2(192, 228)
+process_material = SubResource("ParticleProcessMaterial_ae8nb")
+texture = ExtResource("8_1hu6d")
+lifetime = 5.0
+
+[connection signal="mouse_shape_entered" from="Puzzle/CutoutManager/CutoutPrefab" to="Puzzle/CutoutManager/CutoutPrefab" method="_on_mouse_shape_entered"]
+[connection signal="mouse_shape_exited" from="Puzzle/CutoutManager/CutoutPrefab" to="Puzzle/CutoutManager/CutoutPrefab" method="_on_mouse_shape_exited"]

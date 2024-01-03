@@ -40,7 +40,6 @@ script = ExtResource("3_nwrv3")
 [node name="pipe" type="Area2D" parent="CutoutManager"]
 z_index = 1
 script = ExtResource("4_rxrwq")
-dependencies_paths = Array[NodePath]([NodePath("../n"), NodePath("../pas")])
 
 [node name="Sprite" type="Sprite2D" parent="CutoutManager/pipe"]
 material = SubResource("ShaderMaterial_ep6wc")

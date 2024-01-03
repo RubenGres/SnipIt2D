@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://ped3mr3m8ag5"]
+
+[ext_resource type="Texture2D" uid="uid://dld8o2qtyuwda" path="res://Assets/Textures/Levels/level2/battery.png" id="1_pq4kx"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Pause" type="Button" parent="MainMenu"]
+layout_mode = 2
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 76.0
+offset_bottom = 37.0
+text = "Pause"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -54.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="DropArea" type="Button" parent="MainMenu/HFlowContainer"]
+layout_mode = 2
+text = "End condition"
+vertical_icon_alignment = 0
+
+[node name="TextureRect" type="TextureRect" parent="MainMenu/HFlowContainer/DropArea"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = -148.0
+offset_right = 283.0
+offset_bottom = 42.0
+rotation = 0.535956
+texture = ExtResource("1_pq4kx")
+expand_mode = 1
+
+[node name="FlowContainer" type="FlowContainer" parent="MainMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VFlowContainer" type="VFlowContainer" parent="MainMenu/FlowContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="MainMenu/Pause" to="MainMenu" method="_on_start_pressed"]

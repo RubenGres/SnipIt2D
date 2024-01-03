@@ -18,5 +18,5 @@ func _ready():
 
 
 func _process(delta):
-	self.scale = _cursor_scale * 1/%GameCamera.zoom
+	self.scale = _cursor_scale * 1/$"../GameCamera".zoom
 	self.position = get_global_mouse_position()

@@ -8,6 +8,8 @@ var _dragged_cutout
 
 var _children: Array
 
+var _mouse_cursor
+
 func _get_top_cutout_index():
 	for i in range(_children.size() - 1, -1, -1):
 		var child = _children[i]
@@ -75,8 +77,7 @@ func _set_pitch_in_cutouts():
 
 
 func _ready():
-	pass
-
+	_mouse_cursor = $"../../Player/MouseCursor"
 
 func _process(delta):
 	if not _children:
@@ -88,11 +89,11 @@ func _process(delta):
 		var cutout = _children[index]
 		
 		if not cutout.is_snipped:
-			%MouseCursor.change_cursor("cissors_open")
+			_mouse_cursor.change_cursor("cissors_open")
 		elif not cutout.dragging:
-			%MouseCursor.change_cursor("hand_open")
+			_mouse_cursor.change_cursor("hand_open")
 		else:
-			%MouseCursor.change_cursor("hand_closed")
+			_mouse_cursor.change_cursor("hand_closed")
 	else:
-		%MouseCursor.change_cursor("dot")
+		_mouse_cursor.change_cursor("dot")
 		
