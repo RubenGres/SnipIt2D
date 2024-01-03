@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkepm8v4j6qw3"]
+
+[ext_resource type="Script" path="res://Scripts/sound_effects.gd" id="1_7il3i"]
+[ext_resource type="AudioStream" uid="uid://xtuw64tf35cm" path="res://SFX/cut sound.mp3" id="2_lf6mt"]
+[ext_resource type="AudioStream" uid="uid://5l5f36rry05g" path="res://SFX/wood pickup sound.mp3" id="3_j3s0f"]
+[ext_resource type="AudioStream" uid="uid://cx5isow5rg3vt" path="res://SFX/wood drop sound.mp3" id="4_q2vgb"]
+[ext_resource type="AudioStream" uid="uid://eaol8utpthn4" path="res://SFX/Theme.mp3" id="5_tl0uk"]
+
+[node name="SFX" type="Node"]
+script = ExtResource("1_7il3i")
+
+[node name="cut" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lf6mt")
+
+[node name="pickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_j3s0f")
+
+[node name="drop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_q2vgb")
+
+[node name="main_theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_tl0uk")
+volume_db = -15.0
+autoplay = true

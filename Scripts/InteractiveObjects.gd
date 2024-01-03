@@ -4,11 +4,12 @@ extends Area2D
 var pitch = 1
 var _outline_width
 @export var pickup_height = 10
+@export var dependencies_paths:Array[NodePath] = []
 
 # Variables for dragging
 var dragging = false
 var is_snipped = false
-@export var dependencies = []
+var dependencies:Array[Node] = []
 
 var sprite
 var shadow
@@ -72,14 +73,21 @@ func _ready():
 	sprite = get_node("Sprite")
 	shadow = get_node("Sprite_shadow")
 	sprite.material.set_shader_parameter("opacity", 0)
-	_SFX_ref = get_tree().get_root().get_node("LevelScene/SFX")
+	_SFX_ref = %SFX
 	_outline_width = sprite.material.get_shader_parameter("line_thickness")
+	
+	# create dependencies list from paths
+	if len(dependencies_paths) != 0:
+		var new_deps:Array[Node] = []
+		for path in dependencies_paths:
+			new_deps.append(get_node(path))
+		dependencies = new_deps
 	
 	set_process_input(true)
 
 func _process(delta):
-	_puzzle_ref = get_tree().get_root().get_node("LevelScene/Puzzle")
-	_camera_ref = get_tree().get_root().get_node("LevelScene/GameCamera")
+	_puzzle_ref = %Puzzle
+	_camera_ref = %GameCamera
 	
 	if is_snipped:
 		sprite.material.set_shader_parameter("opacity", 1)

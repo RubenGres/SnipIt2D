@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/LevelBuilder.gd" id="1_4o7ij"]
 [ext_resource type="Texture2D" uid="uid://bwo67l0hu6brq" path="res://Assets/Textures/decor/wooden-flooring.jpg" id="2_5ljlv"]
-[ext_resource type="Texture2D" uid="uid://kcyuf6tuaj1d" path="res://Assets/Textures/Levels/level0/background.png" id="3_dvoxt"]
+[ext_resource type="Texture2D" uid="uid://04dakxrax2ip" path="res://Assets/Textures/Levels/level2/full_image.jpg" id="3_lspe7"]
 [ext_resource type="Script" path="res://Scripts/CutoutManager.gd" id="4_nmfld"]
 [ext_resource type="Script" path="res://Scripts/InteractiveObjects.gd" id="5_jt6yl"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="6_88cay"]
@@ -45,14 +45,14 @@ scale = Vector2(0.231689, 0.231689)
 texture = ExtResource("2_5ljlv")
 
 [node name="Puzzle" type="Node2D" parent="."]
-visible = false
 z_as_relative = false
 position = Vector2(583, 331)
-scale = Vector2(1.29884, 1.29884)
+scale = Vector2(1.69466, 1.69466)
 script = ExtResource("1_4o7ij")
 
 [node name="Background" type="Sprite2D" parent="Puzzle"]
-texture = ExtResource("3_dvoxt")
+scale = Vector2(0.305338, 0.305338)
+texture = ExtResource("3_lspe7")
 
 [node name="CutoutManager" type="Node2D" parent="Puzzle"]
 unique_name_in_owner = true
@@ -74,13 +74,17 @@ texture = ExtResource("7_fn2ga")
 position = Vector2(-1.50375, -4.51129)
 polygon = PackedVector2Array(-5.26312, 36.8421, 80.4511, -46.6165, 215.789, 132.331)
 
-[node name="MainMenu" parent="." instance=ExtResource("15_60l18")]
-
 [node name="GameCamera" type="Camera2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(583, 331)
 position_smoothing_speed = 1.0
 script = ExtResource("8_koetf")
+
+[node name="MainMenu" parent="GameCamera" instance=ExtResource("15_60l18")]
+offset_left = -583.0
+offset_top = -331.0
+offset_right = -583.0
+offset_bottom = -331.0
 
 [node name="MouseCursor" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -99,7 +103,7 @@ unique_name_in_owner = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_as_relative = false
-position = Vector2(192, 228)
+position = Vector2(372, 213)
 process_material = SubResource("ParticleProcessMaterial_ae8nb")
 texture = ExtResource("9_dxwor")
 lifetime = 5.0
